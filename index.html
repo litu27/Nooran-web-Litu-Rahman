@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nooran - Premium Panjabi Collection | Bangladesh</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&family=Lora:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ==================== NAVIGATION BAR ==================== -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+          <img src="weblogo.png" alt="Nooran Logo" class="logo-image" />
+          <span class="logo-text">NOORAN</span>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#products" class="nav-link">Shop</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+
+        <!-- Cart Icon -->
+        <div class="nav-right">
+          <button class="cart-btn" id="cartBtn">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-count" id="cartCount">0</span>
+          </button>
+          <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Enlighten Your Style</h1>
+        <p class="hero-subtitle">
+          Experience Premium Panjabis Designed for Modern Bangladesh
+        </p>
+        <button class="cta-btn" id="shopNowBtn">Shop Now</button>
+      </div>
+      <div class="hero-background"></div>
+    </section>
+
+    <!-- ==================== FEATURED PRODUCTS SECTION ==================== -->
+    <section id="products" class="products-section">
+      <div class="container">
+        <h2 class="section-title">Our Collection</h2>
+        <p class="section-subtitle">Handpicked Panjabis for Every Occasion</p>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid">
+          <!-- Products will be dynamically inserted here via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PRODUCT QUICK VIEW MODAL ==================== -->
+    <div class="modal" id="quickViewModal">
+      <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+
+        <div class="modal-body">
+          <div class="modal-image">
+            <img id="modalProductImage" src="" alt="Product Image" />
+          </div>
+
+          <div class="modal-details">
+            <h2 id="modalProductName"></h2>
+
+            <!-- Price Section -->
+            <div class="price-section">
+              <span class="original-price" id="modalOriginalPrice"></span>
+              <span class="discounted-price" id="modalDiscountedPrice"></span>
+              <span class="discount-percentage" id="modalDiscount"></span>
+            </div>
+
+            <!-- Stock Availability -->
+            <div class="stock-info">
+              <i class="fas fa-check-circle"></i>
+              <span id="modalStockStatus"></span>
+            </div>
+
+            <!-- Size Selection -->
+            <div class="size-selection">
+              <label>Select Size:</label>
+              <div class="size-options" id="sizeOptions">
+                <button class="size-btn" data-size="S">S</button>
+                <button class="size-btn" data-size="M">M</button>
+                <button class="size-btn" data-size="L">L</button>
+                <button class="size-btn" data-size="XL">XL</button>
+                <button class="size-btn" data-size="XXL">XXL</button>
+              </div>
+            </div>
+
+            <!-- Quantity Selection -->
+            <div class="quantity-selection">
+              <label>Quantity:</label>
+              <div class="quantity-controls">
+                <button class="qty-btn" id="decreaseQty">-</button>
+                <input
+                  type="number"
+                  id="quantityInput"
+                  value="1"
+                  min="1"
+                  readonly
+                />
+                <button class="qty-btn" id="increaseQty">+</button>
+              </div>
+            </div>
+
+            <!-- Product Description -->
+            <div class="product-description">
+              <p id="modalProductDescription"></p>
+            </div>
+
+            <!-- Add to Cart Button -->
+            <button class="add-to-cart-btn" id="addToCartBtn">
+              <i class="fas fa-shopping-bag"></i> Add To Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SHOPPING CART SIDEBAR ==================== -->
+    <div class="cart-sidebar" id="cartSidebar">
+      <div class="cart-header">
+        <h2>Shopping Cart</h2>
+        <span class="close-cart" id="closeCart">&times;</span>
+      </div>
+
+      <div class="cart-items" id="cartItems">
+        <!-- Cart items will be inserted here -->
+      </div>
+
+      <div class="cart-empty" id="cartEmpty">
+        <i class="fas fa-shopping-bag"></i>
+        <p>Your cart is empty</p>
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Subtotal:</span>
+          <span id="cartSubtotal">৳0</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== CHECKOUT MODAL ==================== -->
+    <div class="modal" id="checkoutModal">
+      <div class="modal-content checkout-modal-content">
+        <span class="close-modal" id="closeCheckout">&times;</span>
+
+        <div class="checkout-container">
+          <!-- Order Summary -->
+          <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div id="orderSummaryItems"></div>
+            <div class="order-total">
+              <span>Total:</span>
+              <span id="orderTotal">৳0</span>
+            </div>
+          </div>
+
+          <!-- Checkout Form -->
+          <form id="checkoutForm" class="checkout-form">
+            <h3>Delivery Information</h3>
+
+            <!-- Full Name -->
+            <div class="form-group">
+              <label for="fullName">Full Name *</label>
+              <input
+                type="text"
+                id="fullName"
+                required
+                placeholder="Enter your full name"
+              />
+              <span class="error-message" id="nameError"></span>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+              <label for="phoneNumber">Phone Number (BD) *</label>
+              <input
+                type="tel"
+                id="phoneNumber"
+                required
+                placeholder="e.g., +880 1X XXXX XXXX"
+              />
+              <span class="error-message" id="phoneError"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input
+                type="email"
+                id="email"
+                required
+                placeholder="your.email@example.com"
+              />
+              <span class="error-message" id="emailError"></span>
+            </div>
+
+            <!-- Full Address -->
+            <div class="form-group">
+              <label for="address">Full Delivery Address *</label>
+              <textarea
+                id="address"
+                required
+                placeholder="Enter your complete address (House, Area, City, District)"
+                rows="4"
+              ></textarea>
+              <span class="error-message" id="addressError"></span>
+            </div>
+
+            <!-- Payment Method -->
+            <h3 style="margin-top: 2rem">Payment Method</h3>
+            <div class="payment-methods">
+              <!-- Bkash -->
+              <label class="payment-option">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="bkash"
+                  required
+                />
+                <div class="payment-card bkash-card">
+                  <i class="fas fa-mobile-alt"></i>
+                  <span>Bkash</span>
+                </div>
+              </label>
+
+              <!-- Nagad -->
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="nagad" />
+                <div class="payment-card nagad-card">
+                  <i class="fas fa-mobile-alt"></i>
+                  <span>Nagad</span>
+                </div>
+              </label>
+
+              <!-- Rocket -->
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="rocket" />
+                <div class="payment-card rocket-card">
+                  <i class="fas fa-mobile-alt"></i>
+                  <span>Rocket</span>
+                </div>
+              </label>
+            </div>
+
+            <!-- Place Order Button -->
+            <button type="submit" class="place-order-btn">Place Order</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SUCCESS NOTIFICATION ==================== -->
+    <div class="success-notification" id="successNotification">
+      <div class="notification-content">
+        <i class="fas fa-check-circle"></i>
+        <h3>Order Placed Successfully!</h3>
+        <p id="successMessage"></p>
+        <button class="notification-btn" id="okBtn">Continue Shopping</button>
+      </div>
+    </div>
+
+    <!-- ==================== OVERLAY ==================== -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ==================== FOUNDER & CHIEF ARCHITECT SECTION ==================== -->
+    <section class="founder-section">
+        <div class="container">
+            <div class="founder-content">
+                <h2 class="founder-title">Founder & Chief Architect</h2>
+                <h3 class="founder-name">Litu Rahman</h3>
+                <p class="founder-bio">Nooran is a vision born from a passion for premium Panjabi craftsmanship. Crafted and coded with care by its Founder, Litu Rahman.</p>
+                <div class="founder-accent"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <p class="copyright">&copy; 2026 Nooran. All Rights Reserved.</p>
+                <p class="developer-credit">Designed & Developed by <span class="developer-name">Litu Rahman</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== FLOATING WHATSAPP BUTTON ==================== -->
+    <a href="https://wa.me/8801327002818" target="_blank" class="whatsapp-button" title="Chat with Founder: Litu Rahman">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Chat with Founder: Litu Rahman</span>
+    </a>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
